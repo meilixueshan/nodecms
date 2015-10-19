@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include resources.html %>
+</head>
+
+<body>
+
+    <% include header.html %>
+        <!-- /.row -->
+        <div class="container marketing">
+            <h1 class="news_title"><%=article.title%></h1>
+            <p class="news_come">
+                发表于：
+                <%=dateFormat(article.publishTime, "yyyy-MM-dd hh:mm")%>&nbsp;&nbsp;&nbsp; 作者：
+                    <%=article.author%>
+                        &nbsp;&nbsp;&nbsp;来源：
+                        <%=article.comeFrom%>
+            </p>
+            <p class="news_remark">
+                <%-article.content%>
+            </p>
+
+            <% include footer.html %>
+        </div>
+</body>
+
+</html>

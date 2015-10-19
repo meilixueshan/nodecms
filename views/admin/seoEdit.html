@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>单页面列表</title>
+    <% include resources.html %>
+        <script type="text/javascript">
+            $(function () {
+                $("#btnSave").bind("click", function () {
+                    var data = {
+                        id: $("#hideId").val(),
+                        pageName: $("#txtPageName").val(),
+                        seoTitle: $("#txtSEOTitle").val(),
+                        seoKeywords: $("#txtSEOKeywords").val(),
+                        seoDescription: $("#txtSEODescription").val(),
+                    };
+
+                    var url = "/admin/seo/save";
+                    $.ajaxPost(url, data, function (result) {
+                        if (result === "") {
+                            _mapp.alert("保存完成！", function () {
+                                window.location = "/admin/seo";
+                            });
+                        } else {
+                            _mapp.alert("保存失败！失败原因：" + result);
+                        }
+                    }, function (err) {
+                        _mapp.alert("保存失败！失败原因：" + err);
+                    });
+                });
+            });
+        </script>
+</head>
+
+<body>
+    <form id="form1" name="form1" method="post" action="" class="xw_container">
+        <table border="0" cellspacing="1" cellpadding="0" class="xw_edit_table">
+            <tr>
+                <td class="label">页面名称：</td>
+                <td class="input">
+                    <input type="text" id="txtPageName" value="<%=data.pageName%>" class="win" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">SEO标题：</td>
+                <td class="input">
+                    <input type="text" id="txtSEOTitle" value="<%=data.seoTitle%>" class="win" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">SEO关键词：</td>
+                <td class="input">
+                    <input type="text" id="txtSEOKeywords" value="<%=data.seoKeywords%>" class="win" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">SEO描述：</td>
+                <td class="input">
+                    <textarea id="txtSEODescription" class="wtextarea"><%=data.seoDescription%></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"></td>
+                <td class="input">
+                    <input type="button" id="btnSave" name="btnSave" value="保存" class="xw_btn" />
+                    <input type="hidden" id="hideId" value="<%=data.id%>" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

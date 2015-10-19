@@ -1,0 +1,14 @@
+<div ng-controller="mainController">
+	<nav class="navbar navbar-default navbar-inverse nav-fixed-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">NodeCMS</a>
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<div class="list-group">
+			<a class="list-group-item" ng-repeat="item in menus" href="{{item.url}}">
+				<span class="badge">2014-12-12</span>{{item.text}}
+			</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,218 @@
+var Sequelize = require('sequelize');
+var config = require('../config.json').db;
+var sequelize = new Sequelize(config.database, config.user, config.password, config.options);
+
+// definition
+var Task = sequelize.define('Task', {
+    // auto increment, primaryKey, unique
+    id : {type : Sequelize.INTEGER, autoIncrement : true, primaryKey : true, unique : true},
+
+    // comment
+    title : {type : Sequelize.STRING, comment : 'Task title'},
+
+    // allow null
+    description : {type : Sequelize.TEXT, allowNull : true},
+
+    // default value
+    deadline : {type : Sequelize.DATE, defaultValue : Sequelize.NOW}
+});
+
+
+Task.sync().on('success', function(){
+    console.log('aa..');
+}).on('failure', function(){
+    console.log('bb..');
+});
+
+// sequelize.query('your query', [, callee], [, options], [, replacements])
+// Callee is the model definition. This allows you to easily map a query to a predefined model for sequelizejs
+// Options is an object with the following keys:
+// {
+//  logging: console.log, a function (or false) for logging your queries
+//  plain: false,  if plain is true, then sequelize will return all of the records within an array, otherwise it will return a single object/first record returned.
+//  raw: false,    Set this to true if you don't have a model definition for your query
+// }
+// Replacements is a simple array that replaces all of the bindings within your query
+sequelize.query('select * from user  where title = ? and description = ?', null, {logging : true, plain : true,  raw : true}, ['test_title_1', 'test_description_1']).success(function(res){
+    console.log(res);
+});
+
+// find
+Task.findAll({limit : 10, order : 'id asc'}, {raw : true, logging : true, plain : false}).on('success', function(res){
+    console.log(res);
+}).on('failure', function(err){
+    console.log(err);
+})
+
+// count
+Task.count({where : {title : 'test_title_1'}}, {logging : false}).on('success', function(i){
+    console.log(i);
+}).on('failure', function(err){
+    console.log(err);
+});
+
+// max or min
+Task.max('id').on('success', function(max){
+    console.log(max);
+}).on('failure', function(err){
+    console.log(err);
+});
+
+Task.create({title : 'test_title_4', 'description' : 'test_description_4'}).on('success', function(msg){
+    console.log(msg);
+}).on('failure', function(err){
+    console.log(err);
+});
+
+// insert
+Task.build({title : 'test_title_3', 'description' : 'test_description_3'}).save().on('success', function(msg){
+    console.log(msg);
+}).on('failure', function(err){
+    console.log(err);
+});
+
+// update
+Task.update({description : 'test_description_2000'}, {id : '2'}).on('success', function(msg){
+    console.log(msg);
+}).on('failure', function(err){
+    console.log(err);
+});
+
+// delete
+Task.destroy({id : '4'}).on('success', function(msg){
+    console.log(msg);
+}).on('failure', function(err){
+    console.log(err);
+});
+
+
+===================================================================================
+
+sequelize.query("UPDATE users SET y = 42 WHERE x = 12").spread(function(results, metadata) {
+  // Results will be an empty array and metadata will contain the number of affected rows.
+})
+
+In cases where you don't need to access the metadata you can pass in a query type to tell sequelize how to format the results. For example, for a simple select query you could do:
+
+sequelize.query("SELECT * FROM `users`", { type: sequelize.QueryTypes.SELECT})
+  .then(function(users) {
+    // We don't need spread here, since only the results will be returned for select queries
+  })
+
+Several other query types are available. Peek into the source for details
+
+A second option is the model. If you pass a model the returned data will be instances of that model.
+
+// Callee is the model definition. This allows you to easily map a query to a predefined model
+sequelize.query('SELECT * FROM projects', { model: Projects }).then(function(projects){
+  // Each record will now be a instance of Project
+})
+
+Replacements
+
+Replacements in a query can be done in two different ways, either using named parameters (starting with :), or unnamed, represented by a ?. Replacements are passed in the options object.
+
+    If an array is passed, ? will be replaced in the order that they appear in the array
+    If an object is passed, :key will be replaced with the keys from that object. If the object contains keys not found in the query or vice verca, an exception will be thrown.
+
+sequelize.query('SELECT * FROM projects WHERE status = ?',
+  { replacements: ['active'], type: sequelize.QueryTypes.SELECT }
+).then(function(projects) {
+  console.log(projects)
+})
+
+sequelize.query('SELECT * FROM projects WHERE status = :status ',
+  { replacements: { status: 'active' }, type: sequelize.QueryTypes.SELECT }
+).then(function(projects) {
+  console.log(projects)
+})
+
+
+
+
+===========================================================================
+sequelize.query('SELECT...').spread(function (results, metadata) {
+  // Raw query - use spread
+});
+
+sequelize.query('SELECT...', { type: sequelize.QueryTypes.SELECT }).then(function (results) {
+  // SELECT query - use then
+})
+
+
+
+
+
+=====================================
+function add(a, b) {
+			return a + b;
+		}
+
+	var Queue = {
+		run : function(methods) {
+			if(methods) {
+				for(var i=0,len = methods.length; i< len; i++) {
+					var fn = eval(methods[i].method);
+					var result = fn.apply(this, methods[i].params);
+					document.writeln(result);
+				}
+			}
+			return this;
+		},
+		success: function() {
+			alert("success");
+			return this;
+		},
+		error: function() {
+			alert("error");
+			return this;
+		}
+	};
+Queue
+.run([
+	{"method":"add", "params":[2, 3, {"name":"lisi"}]},
+])
+.success(function(){})
+.error(function(){});
+
+
+
+
+============================================================
+Sequelize.STRING                      // VARCHAR(255)
+Sequelize.STRING(1234)                // VARCHAR(1234)
+Sequelize.STRING.BINARY               // VARCHAR BINARY
+Sequelize.TEXT                        // TEXT
+
+Sequelize.INTEGER                     // INTEGER
+Sequelize.BIGINT                      // BIGINT
+Sequelize.BIGINT(11)                  // BIGINT(11)
+
+Sequelize.FLOAT                       // FLOAT
+Sequelize.FLOAT(11)                   // FLOAT(11)
+Sequelize.FLOAT(11, 12)               // FLOAT(11,12)
+
+Sequelize.REAL                        // REAL        PostgreSQL only.
+Sequelize.REAL(11)                    // REAL(11)    PostgreSQL only.
+Sequelize.REAL(11, 12)                // REAL(11,12) PostgreSQL only.
+
+Sequelize.DOUBLE                      // DOUBLE
+Sequelize.DOUBLE(11)                  // DOUBLE(11)
+Sequelize.DOUBLE(11, 12)              // DOUBLE(11,12)
+
+Sequelize.DECIMAL                     // DECIMAL
+Sequelize.DECIMAL(10, 2)              // DECIMAL(10,2)
+
+Sequelize.DATE                        // DATETIME for mysql / sqlite, TIMESTAMP WITH TIME ZONE for postgres
+Sequelize.BOOLEAN                     // TINYINT(1)
+
+Sequelize.ENUM('value 1', 'value 2')  // An ENUM with allowed values 'value 1' and 'value 2'
+Sequelize.ARRAY(Sequelize.TEXT)       // Defines an array. PostgreSQL only.
+
+Sequelize.JSON                        // JSON column. PostgreSQL only.
+Sequelize.JSONB                       // JSONB column. PostgreSQL only.
+
+Sequelize.BLOB                        // BLOB (bytea for PostgreSQL)
+Sequelize.BLOB('tiny')                // TINYBLOB (bytea for PostgreSQL. Other options are medium and long)
+
+Sequelize.UUID     

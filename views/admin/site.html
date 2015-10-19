@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>基本信息</title>
+    <% include resources.html %>
+	<script type="text/javascript">
+		$(function() {
+			$("#btnSave").bind("click", function() {
+				var data = {
+					DomainName : $("#txtDomainName").val(),
+					SiteName : $("#txtSiteName").val(),
+					CompanyName : $("#txtCompanyName").val(),
+					Address : $("#txtAddress").val(),
+					Tel : $("#txtTel").val(),
+					Fax : $("#txtFax").val(),
+					Linkman : $("#txtLinkman").val()
+				};
+				
+				var url = "/admin/site/save";
+				$.ajaxPost(url, data, function(result) {
+					if(result === "") {
+						_mapp.alert("保存完成！");
+					} else {
+						_mapp.alert("保存失败！失败原因：" + result);
+					}
+				}, function(err) {
+					_mapp.alert("保存失败！失败原因：" + err);
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+    <form id="form1" name="form1" method="post" action="" class="xw_container">
+        <table border="0" cellspacing="1" cellpadding="0" class="xw_edit_table">
+            <tr>
+                <td class="label">域名：</td>
+                <td class="input">
+                    <input type="text" id="txtDomainName" class="win" value="<%=DomainName%>" maxlength="255" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">网站名称：</td>
+                <td class="input">
+                    <input type="text" id="txtSiteName" class="win" value="<%=SiteName%>" maxlength="255" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">公司名称：</td>
+                <td class="input">
+                    <input type="text" id="txtCompanyName" class="win" value="<%=CompanyName%>" maxlength="255" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">地址：</td>
+                <td class="input">
+                    <input type="text" id="txtAddress" class="win" value="<%=Address%>" maxlength="255" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">电话：</td>
+                <td class="input">
+                    <input type="text" id="txtTel" class="win" value="<%=Tel%>" maxlength="255" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">传真：</td>
+                <td class="input">
+                    <input type="text" id="txtFax" class="win" value="<%=Fax%>" maxlength="255" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">联系人：</td>
+                <td class="input">
+                    <input type="text" id="txtLinkman" class="win" value="<%=Linkman%>" maxlength="255" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label"></td>
+                <td class="input">
+                    <input type="button" id="btnSave" name="btnSave" value="保存" class="xw_btn" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

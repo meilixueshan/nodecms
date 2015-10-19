@@ -1,0 +1,14 @@
+<div ng-controller="employeeListController">
+	<nav class="navbar navbar-default navbar-inverse nav-fixed-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Employee - TianCheng Inc.</a>
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<div class="list-group">
+			<a class="list-group-item {{ item.branchId | clsfilter : {'express': '{0}==0', 'success': ' active disabled', 'fail': ''} }}" href="{{item.id}}"  ng-repeat="item in employees">
+				<span class="badge">14</span>{{item.name}}
+			</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>关键词列表</title>
+    <% include resources.html %>
+        <script type="text/javascript">
+            function deleteFn(id) {
+                _mapp.confirm("确定要删除此信息吗？", function () {
+                    var url = "/admin/seo/delete/" + id;
+                    $.ajaxGet(url, null, function (result) {
+                        if (result === "") {
+                            _mapp.alert("删除完成！", function () {
+                                window.location.reload(0);
+                            });
+                        } else {
+                            _mapp.alert("删除失败！失败原因：" + result);
+                        }
+                    }, function (err) {
+                        _mapp.alert("删除失败！失败原因：" + err);
+                    });
+                });
+            }
+
+            $(function () {
+                $(".delAction").bind("click", function () {
+                    deleteFn($(this).attr("data-id"));
+                });
+            });
+        </script>
+</head>
+
+<body>
+    <form id="form1" name="form1" method="post" action="" class="xw_container">
+        <table border="0" cellspacing="1" cellpadding="0" class="xw_list_table">
+            <tr>
+                <th style="width:50px;">编号</th>
+				<th style="width:120px;">页面名称</th>
+				<th>SEO标题</th>
+				<th style="width:60px;">管理</th>
+            </tr>
+            <% if (data.length) { %>
+                <% data.forEach(function(seo){ %>
+                    <tr>
+                        <td>
+                            <%= seo.id %>
+                        </td>
+                        <td>
+                            <%= seo.pageName %>
+                        </td>
+                        <td>
+                            <%= seo.seoTitle %>
+                        </td>
+                        <td><a href="/admin/seo/edit/<%=seo.id%>">修改</a>
+                            <a href="javascript:void(0)" data-id="<%=seo.id%>" class="delAction">删除</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                        <% } %>
+        </table>
+    </form>
+</body>
+
+</html>

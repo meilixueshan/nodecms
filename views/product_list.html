@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include resources.html %>
+        <script type="text/javascript">
+            $(function () {
+                $("#btnSearch").bind("click", function () {
+                    var keyword = $("#keyTxt").val();
+                    var categoryId = $("#hideCategoryId").val();
+                    window.location = "/product/list/" + categoryId + "/?k=" + keyword;
+                });
+            });
+        </script>
+</head>
+
+<body>
+
+    <% include header.html %>
+        <div class="container marketing">
+            <h3 class="win_title"><%=category.categoryName%></h3>
+            <div class="row marketing">
+                <% if (articles.length) { %>
+                    <% articles.forEach(function(article){ %>
+                        <div class="col-lg-4">
+                            <a href="/product/detail/<%=article.id%>"><img class="img-circle" src="/public/images/01.jpg" data-src="<%=article.picFileName%>" alt="<%=article.title%>" /></a>
+                            <h4><a href="/product/detail/<%=article.id%>"><%=article.title%></a></h4>
+                        </div>
+                        <% }) %>
+
+                            <% } %>
+
+            </div>
+            <div class="search">
+                <div class="search_1">
+                    <input type="hidden" id="hideCategoryId" value="<%=category.id%>" />
+                    <input name="keyTxt" type="text" id="keyTxt" class="txt" value="" />
+                    <input name="Submit" type="button" id="btnSearch" value="搜索" class="btn btn-sm btn-default" />
+                </div>
+                <div class="search_2">
+                    <%-pager%>
+                </div>
+            </div>
+
+            <% include footer.html %>
+        </div>
+</body>
+
+</html>

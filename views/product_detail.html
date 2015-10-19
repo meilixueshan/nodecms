@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include resources.html %>
+</head>
+
+<body>
+
+    <% include header.html %>
+        <!-- /.row -->
+        <div class="container marketing">
+            <h1 class="news_title tc"><%=article.title%></h1>
+            <p class="news_come">
+            </p>
+            <p class="news_remark tc">
+                <%-article.content%>
+            </p>
+
+            <% include footer.html %>
+        </div>
+</body>
+
+</html>

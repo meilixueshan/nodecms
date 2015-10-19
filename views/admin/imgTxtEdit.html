@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>位置信息编辑</title>
+    <% include resources.html %>
+        <script type="text/javascript">
+            $(function () {
+                $("#btnSave").bind("click", function () {
+                    var data = {
+                        id: $("#hideId").val(),
+                        positionId: $("#hidePositionId").val(),
+						title: $("#txtTitle").val(),
+						url: $("#txtUrl").val(),
+						picFileName: $("#txtPicFileName").val(),
+                        remark: $("#txtRemark").val(),
+                        sortNum: $("#txtSortNum").val(),
+                    };
+
+                    var url = "/admin/imgtxt/save";
+                    $.ajaxPost(url, data, function (result) {
+                        if (result === "") {
+                            _mapp.alert("保存完成！", function () {
+                                window.location = "/admin/imgtxt/index/" + data.positionId;
+                            });
+                        } else {
+                            _mapp.alert("保存失败！失败原因：" + result);
+                        }
+                    }, function (err) {
+                        _mapp.alert("保存失败！失败原因：" + err);
+                    });
+                });
+            });
+        </script>
+</head>
+
+<body>
+    <form id="form1" name="form1" method="post" action="" class="xw_container">
+        <table border="0" cellspacing="1" cellpadding="0" class="xw_edit_table">
+            <tr>
+                <td class="label">信息标题：</td>
+                <td class="input">
+                    <input type="text" id="txtTitle" value="<%=data.title%>" class="win" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">信息摘要：</td>
+                <td class="input"><textarea id="txtRemark" class="wtextarea" value="<%=data.remark%>"></textarea></td>
+            </tr>
+            <tr>
+				<td class="label">图片路径：</td>
+				<td class="input"><input type="text" id="txtPicFileName" class="win" value="<%=data.picFileName%>" /></td>
+			</tr>
+			<tr>
+				<td class="label">链接地址：</td>
+				<td class="input"><input type="text" id="txtUrl" class="win" value="<%=data.url%>" /></td>
+			</tr>
+			<tr>
+				<td class="label">排序编号：</td>
+				<td class="input"><input type="text" id="txtSortNum" class="win" value="<%=data.sortNum%>" /></td>
+			</tr>
+            <tr>
+                <td class="label"></td>
+                <td class="input">
+                    <input type="button" id="btnSave" name="btnSave" value="保存" class="xw_btn" />
+                    <input type="hidden" id="hideId" value="<%=data.id%>" />
+					<input type="hidden" id="hidePositionId" value="<%=positionId%>" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

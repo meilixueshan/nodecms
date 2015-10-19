@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>单页面列表</title>
+    <% include resources.html %>
+	<script type="text/javascript" charset="utf-8" src="/public/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/public/ueditor/lang/zh-cn/zh-cn.js"> </script>
+	<link type="text/css" rel="Stylesheet" href="/public/js/jquery.datetimepicker.css" />
+	<script type="text/javascript" src="/public/js/jquery.datetimepicker.js"></script>
+        <script type="text/javascript">
+            $(function () {
+				$('#txtPublishTime').datetimepicker({ lang: 'ch', format: 'Y-m-d H:i', step: 10 });
+				$("#drpCategory").val($("#hideCategoryId").val());
+
+                $("#btnSave").bind("click", function () {
+                    var data = {
+                        id: $("#hideId").val(),
+                        title: $("#txtTitle").val(),
+                        categoryId: $("#drpCategory").val(),
+                        description: $("#txtDescription").val(),
+                        picFileName: $("#txtPicFileName").val(),
+                        author: $("#txtAuthor").val(),
+                        comeFrom: $("#txtComeFrom").val(),
+                        publishTime: $("#txtPublishTime").val(),
+						readNum: $("#txtReadNum").val(),
+                        content: UE.getEditor('txtContent').getContent(),
+                        seoTitle: $("#txtSEOTitle").val(),
+                        seoKeywords: $("#txtSEOKeywords").val(),
+                        seoDescription: $("#txtSEODescription").val(),
+                    };
+
+					if(data.categoryId === "0") {
+						_mapp.alert("请选择分类！");
+						return;
+					}
+
+                    var url = "/admin/article/save";
+                    $.ajaxPost(url, data, function (result) {
+                        if (result === "") {
+                            _mapp.alert("保存完成！", function () {
+                                window.location = "/admin/article";
+                            });
+                        } else {
+                            _mapp.alert("保存失败！失败原因：" + result);
+                        }
+                    }, function (err) {
+                        _mapp.alert("保存失败！失败原因：" + err);
+                    });
+                });
+            });
+        </script>
+</head>
+
+<body>
+    <form id="form1" name="form1" method="post" action="" class="xw_container">
+        <input type="hidden" id="hideRender" value="" />
+        <table border="0" cellspacing="1" cellpadding="0" class="xw_edit_table">
+            <tr>
+                <td class="label">文章标题：</td>
+                <td class="input">
+                    <input type="text" id="txtTitle" class="win" value="<%=data.title%>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">文章摘要：</td>
+                <td class="input">
+                    <textarea id="txtDescription" class="wtextarea"><%=data.description%></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">所属分类：</td>
+                <td class="input">
+					<select id="drpCategory">
+                        <option value="0">---选择分类---</option>
+                        <% if (categories.length > 0) {
+						categories.forEach(function(category){
+						%>
+						<option value="<%=category.id%>"><%=categoryPrefix(category.innerCode)%><%=category.categoryName%></option>
+						<%
+						})
+							}
+						%>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">封面图片：</td>
+                <td class="input">
+                    <input type="text" id="txtPicFileName" class="win" value="<%=data.picFileName%>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">文章作者：</td>
+                <td class="input">
+                    <input type="text" id="txtAuthor" class="win" value="<%=data.author%>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">文章来源：</td>
+                <td class="input">
+                    <input type="text" id="txtComeFrom" class="win" value="<%=data.comeFrom%>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">发布时间：</td>
+                <td class="input">
+                    <input type="text" id="txtPublishTime" class="win" value="<%=dateFormat(data.publishTime, 'yyyy-MM-dd hh:mm')%>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">阅读次数：</td>
+                <td class="input">
+                    <input type="text" id="txtReadNum" class="win" value="<%=data.readNum%>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">文章内容：</td>
+                <td class="input">
+                    <textarea id="txtContent" name="txtContent" style="width:100%"><%=data.content%></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">SEO标题：</td>
+                <td class="input">
+                    <input type="text" id="txtSEOTitle" value="<%=data.seoTitle%>" class="win" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">SEO关键词：</td>
+                <td class="input">
+                    <input type="text" id="txtSEOKeywords" value="<%=data.seoKeywords%>" class="win" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">SEO描述：</td>
+                <td class="input">
+                    <textarea id="txtSEODescription" class="wtextarea"><%=data.seoDescription%></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"></td>
+                <td class="input">
+                    <input type="button" id="btnSave" value="保存" class="xw_btn" />
+                    <input type="hidden" id="hideId" value="<%=data.id%>" />
+					<input type="hidden" id="hideCategoryId" value="<%=data.categoryId%>" />
+                </td>
+            </tr>
+        </table>
+    </form>
+	<script type="text/javascript">
+		var ue = UE.getEditor('txtContent');
+	</script>
+</body>
+
+</html>

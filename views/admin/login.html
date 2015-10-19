@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>系统后台登录</title>
+    <% include resources.html %>
+        <script type="text/javascript">
+            if (window.self != window.top) {
+                window.top.location = "/admin/login";
+            }
+
+            $(function () {
+                $("#btnLogin").bind("click", function () {
+                    var url = "/admin/loginCheck";
+                    var data = {
+                        username: $("#txtUserName").val(),
+                        password: $("#txtPassword").val()
+                    };
+                    $.ajaxGet(url, data, function (result) {
+                        var jsonData = eval('(' + result + ')');
+                        console.log(jsonData);
+                        if (jsonData.success) {
+                            window.location = "/admin/";
+                        }
+                    }, function (e) {
+                        _mapp.alert(e);
+                    });
+                });
+            });
+        </script>
+
+</head>
+
+<body>
+    <input type="hidden" id="action" name="action" value="login" />
+    <div id="yidacms_login">
+        <div id="yidacms_login_left">
+            <div id="logo"><img src="/public/images/xw_logo.png" id="ie6"></div>
+            <p style="text-align:left; margin-left:20px; margin-top:30px; font-size:16px; color:#999999; clear:both;">为中国企业提供动力！</p>
+        </div>
+        <div id="yidacms_img"><img src="/public/images/xw_bg_login.gif"></div>
+        <div id="yidacms_login_right">
+            <table style="margin-top:15px;" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td height="25" width="19%">
+                            <div id="admin_font" align="right">账号：</div>
+                        </td>
+                        <td height="25" width="81%">
+                            <input type="text" id="txtUserName" name="txtUserName" value="admin" class="txt" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="25">
+                            <div id="admin_font" align="right">密码：</div>
+                        </td>
+                        <td height="25">
+                            <input type="password" id="txtPassword" name="txtPassword" value="admin" class="txt" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="25">&nbsp;</td>
+                        <td height="25">
+                            <input type="button" id="btnLogin" value="登录" class="xw_btn" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="Copyright">Powered by <a href="#">MEILIXUESHAN</a></div>
+</body>
+
+</html>

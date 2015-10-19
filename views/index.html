@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include resources.html %>
+</head>
+
+<body>
+    <% include header.html %>
+        <div class="container marketing">
+            <!-- Three columns of text below the carousel -->
+            <div class="row">
+                <% if (pictures.length) { %>
+                    <% pictures.forEach(function(picture){ %>
+                        <div class="col-lg-4">
+                            <a href="/product/detail/<%= picture.id %>"><img class="img-circle" src="/public/images/01.jpg" data-src="<%= picture.picFileName %>" alt="<%= picture.title %>"></a>
+                            <h4 class="news_title"><a href="/product/detail/<%= picture.id %>"><%= picture.title %></a></h4>
+                        </div>
+                        <% }) %>
+                            <% } %>
+            </div>
+            <!-- /.row -->
+
+            <h3 class="win_title">最新文章</h3>
+
+            <div class="row marketing">
+                <% if (articles.length) { %>
+                    <% articles.forEach(function(article){ %>
+                        <div class="col-lg-6">
+                            <h4 class="news_title"><a href="/article/detail/<%=article.id%>"><%= article.title %></a></h4>
+                            <p class="news_remark">
+                                <%= article.description %>
+                            </p>
+                        </div>
+                        <% }) %>
+                            <% } %>
+            </div>
+
+            <% include footer.html %>
+        </div>
+</body>
+
+</html>

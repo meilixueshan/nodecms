@@ -1,0 +1,75 @@
+*{ font-size:12px; font-family:'Microsoft YaHei', Arial, Helvetica, sans-serif;}
+div,ul,li,dl,dt,dd,form{list-style:none; margin:0; padding:0;}
+body{margin:0 auto;font-size:12px;background:#fff;}
+a{color:#0268cd;text-decoration:none}
+a:hover{color:#000000;text-decoration:none;}
+a img{border:none}
+h1{float:left;font-size:12px;height:30px;line-height:32px;padding:0 0 .3em;border-bottom:3px solid #488FCE;color:#555; }
+.clear{clear:both;}
+.winla{width:225px;height:30px;font-size:16px;color:#999999;line-height:27px;}
+.win{width:450px;height:30px; border:1px #CCCCCC solid; background:#FFFFFF; color:#999999; font-size:14px; line-height:30px; padding:0 5px 0 5px;}
+.win3{width:450px;height:30px; border:1px #CCCCCC solid; background:#FFFFFF; color:#999999; font-size:14px; line-height:30px;}
+.inanniu{width:112px;height:30px;font-size:14px;background:URL(../images/skin/bottun.gif); border:0px;color:#FFFFFF;}
+.inanniu2 {width:200px; height:30px;font-size:14px;color:#000;line-height:27px;}
+.wtextarea{width:450px;height:90px;font-size:14px;color:#999999; border:1px #CCCCCC solid; padding:5px;}
+.win2{width:50px;height:30px;font-size:12px;color:#999999;line-height:27px; border:1px #CCCCCC solid;}
+.cc{border:0px solid blue;}
+.yidamoban{width:100%;height:auto;float:left;padding:0px;}
+.yidamoban ul{padding:0px;margin:0px;}
+.yidamoban ul li{width:380px;height:210px;float:left;margin-top:15px;margin-left:10px;border:1px #999999 solid;background:#FFFFFF;padding:6px;}
+.yidamoban_left{float:left;}
+.yidamoban_left img{border:1px #CCCCCC solid;}
+.yidamoban_right{float:left; margin-left:10px; padding:0px;}
+.yidamoban_right p{width:145px; height:14px; line-height:14px; font-size:12px;}
+.uppic{float:left;}
+.uppic2{float:left;margin-left:10px;margin-top:18px;}
+.admintitlebg{background:url(../images/xw_admintitlebg.gif);width:620px;height:65px;padding:25px 0px 0px 10px;}
+.daimayangshi{width:870px;height:200px;font-size:14px;color:#999999; border:1px #CCCCCC solid; padding:5px; line-height:22px;}
+.admin_daohang { height:35px; background: #f4f4f4; margin-bottom:15px; padding-left:25px;}
+.admin_daohang ul { padding:0px;}
+.admin_daohang ul li { width:100px; height:35px; line-height:35px; font-size:14px; text-align: center; float:left;}
+.admin_daohang ul li span { width:100px; height:35px; font-size:14px; display:block; background: #488fce; color:#FFFFFF; }
+.admin_daohang ul li a {color:#000000; font-size:14px;}
+.table_list { border:0px #CCCCCC solid;border-collapse:collapse;}
+.table_list td{ border-bottom:1px #CCCCCC solid;}
+#aa{background:#CAE4FF; color: #666666;}
+#bb{border:0px solid blue;}
+#z{background:#F2F2F2;}
+#yidacms_login { width:600px; height:150px; margin: 0 auto; padding:0px; margin-top:150px;}
+#yidacms_login_left { width:310px; height:150px; float:left;}
+#yidacms_img { width:18px; float:left;}
+#yidacms_login_right { width:270px; height:150px; float:left; margin-left:2px;}
+#logo { width:300px; height:60px; float:left; margin-top:20px;}
+#font { width:300px; height:40px; margin-top:10px; float:left;}
+#admin_font { font-size:14px; color:#666666;}
+#btnLogin { width:100px; height:30px; border:0px; background:#0099FF; color:#FFFFFF;}
+.txt {width:200px; height:25px; line-height:25px; color:#CCCCCC; font-size:14px; border:1px #CCCCCC solid;}
+#Copyright { width:600px; margin:0 auto; margin-top:200px; text-align:center; font-size:12px; color:#666666;}
+#ie6 {behavior: url("../images/iepngfix.htc")}
+.admin_qx { margin:50px 0px 0px 150px; font-size:14px; color:#666666;}
+#shengji {width:100%; height:25px; line-height:25px; text-align:center; color:#FFFFFF; font-weight:bold; background:#F74A60;}
+
+
+/*********************************************************************************
+**********************************************************************************
+**********************************************************************************/
+
+.pagelink {border:1px solid #ccc; background-color:#f5f5f5; padding:3px 8px 4px 8px; font-family:Tahoma, Arial, \5b8b\4f53, sans-serif;}
+.currentPage {background-color:#ccc;}
+
+.xw_container {padding:5px;}
+.xw_list_table {width:100%; background-color:#e5e5e5;}
+.xw_list_table tr th {padding:4px 5px 4px 5px; background-color:#f4f4f4;}
+.xw_list_table tr td {background-color:#fff; padding:4px 5px 4px 5px; text-align:center;}
+
+.xw_edit_table {width:100%; background-color:#e5e5e5;}
+.xw_edit_table tr td {padding:3px 4px 3px 4px;}
+.xw_edit_table tr td.label {text-align:right; width:90px; background-color:#f5f5f5;}
+.xw_edit_table tr td.input {text-align:left; background-color:#fff;}
+
+.tdSortNumber { text-align:center;}
+.xw_txtSortNumber {border:0px; width:100%; height:100%; text-align:center;}
+.xw_btn { width:100px; height:30px; border:0px; background:#488FCE; color:#FFFFFF; cursor:pointer; font-size:13px;}
+.xw_table_pager {width:100%; margin:5px 0 0 0;}
+.xw_table_pager tr td {background-color:#f4f4f4; height:30px; }
+.xw_table_pager tr td span {margin:0 10px;}
