@@ -17,5 +17,10 @@
 登录密码：admin
 
 
+# 联系作者
+QQ：44476511
+
+Email：[44476511@qq.com](mailto:44476511@qq.com)
+
 #License
-[MIT](LICENSE)
+MIT
